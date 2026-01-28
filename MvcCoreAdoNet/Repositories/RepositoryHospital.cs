@@ -110,5 +110,53 @@ namespace MvcCoreAdoNet.Repositories
             this.com.Parameters.Clear();
         }
 
+        public async Task<List<Doctor>> GetDoctoresAsync()
+        {
+            string sql = "select  *  from  DOCTOR";
+            this.com.CommandType = CommandType.Text;
+            this.com.CommandText = sql;
+            await this.cn.OpenAsync();
+            this.reader = await this.com.ExecuteReaderAsync();
+            List<Doctor> doctores = new List<Doctor>();
+            while (await this.reader.ReadAsync())
+            {
+                Doctor doctor = new Doctor();
+                doctor.IdHospital = int.Parse(this.reader["HOSPITAL_COD"].ToString());
+                doctor.IdDoctor = int.Parse(this.reader["DOCTOR_NO"].ToString());
+                doctor.Apellido = this.reader["APELLIDO"].ToString();
+                doctor.Especialidad = this.reader["ESPECIALIDAD"].ToString();
+                doctor.Salario = int.Parse(this.reader["SALARIO"].ToString());
+                doctores.Add(doctor);
+            }
+            await this.reader.CloseAsync();
+            await this.cn.CloseAsync();
+            return doctores;
+        }
+
+        public async Task<List<Doctor>> FindDoctoresAsync(string especialidad)
+        {
+            string sql = "select  *  from  DOCTOR where ESPECIALIDAD=@especialidad";
+            this.com.Parameters.AddWithValue("@especialidad", especialidad);
+            this.com.CommandType = CommandType.Text;
+            this.com.CommandText = sql;
+            await this.cn.OpenAsync();
+            this.reader = await this.com.ExecuteReaderAsync();
+            List<Doctor> doctores = new List<Doctor>();
+            while (await this.reader.ReadAsync())
+            {
+                Doctor doctor = new Doctor();
+                doctor.IdHospital = int.Parse(this.reader["HOSPITAL_COD"].ToString());
+                doctor.IdDoctor = int.Parse(this.reader["DOCTOR_NO"].ToString());
+                doctor.Apellido = this.reader["APELLIDO"].ToString();
+                doctor.Especialidad = this.reader["ESPECIALIDAD"].ToString();
+                doctor.Salario = int.Parse(this.reader["SALARIO"].ToString());
+                doctores.Add(doctor);
+            }
+            await this.reader.CloseAsync();
+            await this.cn.CloseAsync();
+            this.com.Parameters.Clear();
+            return doctores;
+
+        }
     }
 }

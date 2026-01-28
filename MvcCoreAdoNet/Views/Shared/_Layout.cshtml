@@ -37,19 +37,22 @@
                 <li class="nav-item">
                     <a asp-controller="Hospitales" asp-action="Index" class="nav-link">Hospitales</a>
                 </li>
+                <li class="nav-item">
+                    <a asp-controller="Doctores" asp-action="Index" class="nav-link">Doctores</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <main role="main" class="container">
         <div class="mt-5 position-relative">
-            <h1 class="mt-5" id="mensaje">Zona de vistas</h1>
             @if (IsSectionDefined("images"))
             {
                 @RenderSection("images", false)
             }
             else
             {
+                <h1 class="mt-5" id="mensaje">Zona de vistas</h1>
                 <img src="~/images/puig.jpg" style="height:150px;" />
                 <button id="botonInicio" class="btn btn-primary">Boton Layout</button>
             }
