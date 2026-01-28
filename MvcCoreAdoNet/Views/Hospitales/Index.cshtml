@@ -22,9 +22,13 @@
             <td>@hospital.Direccion</td>
             <td>@hospital.Telefono</td>
             <td>
-                @Html.ActionLink("Detalles", "Details", "Hospitales", new { id = hospital.IdHospital } , new { @class = "btn btn-primary" })
+@*              @Html.ActionLink("Detalles", "Details", "Hospitales", new { id = hospital.IdHospital } , new { @class = "btn btn-primary" })
                 @Html.ActionLink("Editar", "Edit", "Hospitales", new { id = hospital.IdHospital }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Borrar", "Delete", "Hospitales", new { id = hospital.IdHospital }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Borrar", "Delete", "Hospitales", new { id = hospital.IdHospital }, new { @class = "btn btn-danger" }) *@
+                @* se puede hacer con tag helpers *@
+                <a asp-controller="Hospitales" asp-action="Details" class="btn btn-primary" asp-route-id="@hospital.IdHospital">Detalles</a>
+                <a asp-controller="Hospitales" asp-action="Edit" class="btn btn-warning" asp-route-id="@hospital.IdHospital">Editar</a>
+                <a asp-controller="Hospitales" asp-action="Delete" class="btn btn-danger" asp-route-id="@hospital.IdHospital">Borrar</a>
             </td>
         </tr>
         }
