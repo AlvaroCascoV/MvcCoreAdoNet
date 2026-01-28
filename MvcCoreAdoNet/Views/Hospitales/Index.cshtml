@@ -2,21 +2,26 @@
 
 <h1>Hospitales  Ado  Net</h1>
 
-<table  class="table  table-bordered">
+<table  class="table table-bordered border-2">
     <thead>
         <tr>
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Teléfono</th>
+            <th>Acción</th>
         </tr>
     </thead>
     <tbody>
+
         @foreach (Hospital hospital in Model)
         {
         <tr>
             <td>@hospital.Nombre</td>
             <td>@hospital.Direccion</td>
             <td>@hospital.Telefono</td>
+            <td>
+                @Html.ActionLink("Detalles", "Details", "Hospitales", new { id = hospital.IdHospital } , new { @class = "btn btn-success" })
+            </td>
         </tr>
         }
     </tbody>
