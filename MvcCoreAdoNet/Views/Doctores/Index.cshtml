@@ -1,12 +1,24 @@
 ﻿@model List<Doctor>
+@{
+    List<string> especialidades = (List<string>)ViewData["ESPECIALIDADES"];
+}
 @section images {
      
 }
 <h1>Doctores por especialidad</h1>
 <div>
     <form method="post">
-        <label>Introduzca especialidad:</label>
-        <input type="text" name="especialidad" class="form-control" />
+        @* <label>Introduzca especialidad:</label>
+        <input type="text" name="especialidad" class="form-control" /> *@
+
+        @* queremos un select con todas las especialidades, mejor que un input *@
+        <select name="especialidad" class="form-control"> 
+            @foreach(string espe in especialidades)
+                {
+                    <option>@espe</option>
+                }
+            </select>
+
         <button class="btn btn-secondary">Buscar doctores</button>
     </form>
 </div>

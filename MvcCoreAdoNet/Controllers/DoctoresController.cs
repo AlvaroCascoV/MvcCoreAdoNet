@@ -15,6 +15,8 @@ namespace MvcCoreAdoNet.Controllers
         public async Task<IActionResult> Index()
         {
             List<Doctor> doctores = await this.repo.GetDoctoresAsync();
+            List<string> especialidades = await this.repo.GetEspecialidadesAsync();
+            ViewData["ESPECIALIDADES"] = especialidades;
             return View(doctores);
         }
 
@@ -22,6 +24,8 @@ namespace MvcCoreAdoNet.Controllers
         public async Task<IActionResult> Index(string especialidad)
         {
             List<Doctor> doctores = await this.repo.FindDoctoresAsync(especialidad);
+            List<string> especialidades = await this.repo.GetEspecialidadesAsync();
+            ViewData["ESPECIALIDADES"] = especialidades;
             return View(doctores);
         }
     }

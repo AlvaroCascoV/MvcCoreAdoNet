@@ -156,7 +156,24 @@ namespace MvcCoreAdoNet.Repositories
             await this.cn.CloseAsync();
             this.com.Parameters.Clear();
             return doctores;
+        }
 
+        public async Task<List<string>> GetEspecialidadesAsync()
+        {
+            string sql = "select distinct ESPECIALIDAD from DOCTOR";
+            this.com.CommandType = CommandType.Text;
+            this.com.CommandText = sql;
+            await this.cn.OpenAsync();
+            this.reader = await this.com.ExecuteReaderAsync();
+            List<string> especialidades = new List<string>();
+            while (await this.reader.ReadAsync())
+            {
+                string espe = this.reader["ESPECIALIDAD"].ToString();
+                especialidades.Add(espe);
+            }
+            await this.reader.CloseAsync();
+            await this.cn.CloseAsync();
+            return especialidades;
         }
     }
 }
